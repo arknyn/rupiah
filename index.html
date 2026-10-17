@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>RUPIAH.</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">RUPIAH<span class="logo-dot">.</span></a>
+        <nav class="nav-links" id="navLinks">
+          <a href="#dashboard" class="nav-link active">Dashboard</a>
+          <a href="#penyebab" class="nav-link">Penyebab</a>
+          <a href="#dampak" class="nav-link">Dampak</a>
+          <a href="#solusi" class="nav-link">Solusi</a>
+          <a href="#glosarium" class="nav-link">Glosarium</a>
+        </nav>
+
+        <div class="nav-actions">
+<button
+  class="icon-btn"
+  id="searchToggle"
+  aria-label="Cari"
+  title="Cari materi"
+>
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+  >
+    <circle cx="11" cy="11" r="7" />
+    <path d="m20 20-3.5-3.5" />
+  </svg>
+</button>
+<div class="search-box" id="searchBox" hidden>
+  <input
+    type="search"
+    id="searchInput"
+    placeholder="Cari materi..."
+    aria-label="Ketik kata kunci"
+  />
+  <p id="searchMessage" role="status"></p>
+</div>
+          </button>
+          <button class="icon-btn" id="themeToggle" aria-label="Ubah tema">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+          </button>
+          <button class="icon-btn hamburger" id="hamburger" aria-label="Menu">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M3 6h18M3 12h18M3 18h18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="dashboard">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <p class="eyebrow">Dashboard · Okt 2026</p>
+            <h1 class="hero-title">
+              Rupiah<br />Melemah<span class="accent">?</span>
+            </h1>
+            <p class="hero-sub">
+              Lihat data, penyebab, dan dampaknya dalam satu halaman.
+            </p>
+            <div class="hero-cta">
+              <a href="#penyebab" class="btn btn-primary">Lihat Detail →</a>
+              <a href="#glosarium" class="btn-link">Pelajari dasar-dasarnya</a>
+            </div>
+          </div>
+
+          <!-- Kolom kanan: card grafik -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <div>
+                <p class="chart-label">USD / IDR</p>
+                <p class="chart-rate" id="rateValue">Rp 18.050</p>
+                <div class="chart-meta">
+                  <span class="badge badge-down">-1,75% · 30 hari</span>
+                  <span class="chart-note">Terendah di Oktober 2026</span>
+                </div>
+              </div>
+              <button class="icon-btn" aria-label="Opsi">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <circle cx="5" cy="12" r="1.5" />
+                  <circle cx="12" cy="12" r="1.5" />
+                  <circle cx="19" cy="12" r="1.5" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Canvas: tempat Chart.js render grafiknya -->
+            <div class="chart-wrap">
+              <canvas id="rupiahChart"></canvas>
+            </div>
+
+            <p class="chart-source">Sumber: Bank Indonesia · JISDOR</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         SECTION 2: PENYEBAB (3 kartu)
+         ═══════════════════════════════════════════ -->
+      <section class="section" id="penyebab">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">01 · Penyebab</p>
+            <h2 class="section-title">Kenapa Rupiah Melemah?</h2>
+            <p class="section-desc">
+              Suku bunga Amerika Serikat yang tinggi membuat dolar AS lebih menarik bagi investor sehingga rupiah tertekan.
+            </p>
+          </div>
+
+          <!-- Grid 3 kolom: pakai CSS Grid -->
+          <div class="cards-3">
+            <article class="card">
+              <span class="card-num">01</span>
+              <h3>Ketidakpastian Global dan Penguatan Dolar AS</h3>
+              <p>
+                Ketidakpastian ekonomi dan politik global, termasuk konflik internasional dan kenaikan harga minyak, dapat memperkuat dolar AS.
+              </p>
+            </article>
+            <article class="card">
+              <span class="card-num">02</span>
+              <h3>Sentimen Investor dan Arus Modal Asing</h3>
+              <p>
+                Kekhawatiran investor terhadap transparansi dan tata kelola pasar modal Indonesia dapat mendorong keluarnya dana asing.
+              </p>
+            </article>
+            <article class="card">
+              <span class="card-num">03</span>
+              <h3>Tingginya Permintaan Dolar untuk Impor dan Utang</h3>
+              <p>
+                Kebutuhan dolar untuk impor dan cicilan utang luar negeri
+                membuat permintaan dolar rutin melebihi pasokan.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         SECTION 3: PERBANDINGAN + KONTEKS
+         Layout split: bar chart kiri, teks kanan
+         ═══════════════════════════════════════════ -->
+      <section class="section section-alt">
+        <div class="container">
+
+<div class="split-2">
+  <div>
+    <p class="eyebrow">Perubahan 30 hari</p>
+    <h3 class="subsection-title">Rupiah vs mata uang lain</h3>
+    <p class="section-desc">
+      Perubahan terhadap dolar AS (%) · 17 Sep – 16 Okt 2026
+    </p>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">IDR</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 60%"></div>
+        </div>
+        <span class="bar-value">-1,49%</span>
+      </div>
+
+      <div class="bar-row">
+        <span class="bar-label">GBP</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 9%"></div>
+        </div>
+        <span class="bar-value">-0,22%</span>
+      </div>
+
+      <div class="bar-row">
+        <span class="bar-label">EUR</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 97%"></div>
+        </div>
+        <span class="bar-value">-2,42%</span>
+      </div>
+
+      <div class="bar-row">
+        <span class="bar-label">CHF</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 3%"></div>
+        </div>
+        <span class="bar-value">+0,07%</span>
+      </div>
+
+      <div class="bar-row">
+        <span class="bar-label">SGD</span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width: 14%"></div>
+        </div>
+        <span class="bar-value">-0,36%</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="eyebrow">Cara membaca</p>
+    <h3 class="subsection-title">
+      Rupiah bukan satu-satunya yang bergerak
+    </h3>
+    <p class="section-desc">
+      Pergerakan mata uang terhadap dolar AS berbeda-beda. Angka negatif
+      menunjukkan mata uang melemah terhadap dolar AS, sedangkan angka
+      positif menunjukkan mata uang menguat.
+    </p>
+    <ul class="bullet-list">
+      <li>Rupiah melemah sekitar 1,49% terhadap dolar AS.</li>
+      <li>Euro melemah sekitar 2,42% terhadap dolar AS.</li>
+      <li>Franc Swiss menguat sekitar 0,07% terhadap dolar AS.</li>
+    </ul>
+  </div>
+</div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         SECTION 4: TIMELINE
+         ═══════════════════════════════════════════ -->
+      <section class="section" id="dampak">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">Sejarah singkat</p>
+            <h2 class="section-title">
+              Lima titik yang membentuk kurs hari ini
+            </h2>
+          </div>
+
+          <ol class="timeline">
+            <li class="timeline-item">
+              <span class="timeline-year">1997</span>
+              <div>
+                <h4>Krisis Moneter Asia</h4>
+                <p>
+                  Krisis yang bermula dari tekanan terhadap mata uang Thailand menyebar ke Indonesia dan menyebabkan rupiah melemah tajam.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-year">1998</span>
+              <div>
+                <h4>Puncak Krisis Rupiah</h4>
+                <p>
+                  Rupiah sempat mencapai sekitar Rp16.000 per dolar AS pada Juni 1998 di tengah krisis ekonomi dan politik.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-year">2020</span>
+              <div>
+                <h4>Pandemi COVID-19</h4>
+                <p>
+                  Ketidakpastian ekonomi global menekan pasar keuangan dan meningkatkan permintaan terhadap dolar AS sebagai aset yang dianggap lebih aman.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-year">2026</span>
+              <div>
+                <h4>Tekanan Suku Bunga dan Konflik Global Inflasi Amerika Serikat</h4>
+                <p>
+                  Potensi suku bunga tinggi lebih lama, serta ketidakpastian konflik internasional meningkatkan tekanan terhadap rupiah.
+                </p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-year">2026</span>
+              <div>
+                <h4>Tekanan Pasar Modal Indonesia</h4>
+                <p>
+                  Kekhawatiran mengenai kemungkinan perubahan status pasar Indonesia dalam indeks MSCI memicu tekanan di pasar keuangan. Pada 16 Oktober 2026, kurs JISDOR mencapai Rp18.052 per dolar AS.
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         SECTION 5: DAMPAK (grid 2x2)
+         ═══════════════════════════════════════════ -->
+      <section class="section section-alt" id="solusi">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">02 · Dampak</p>
+            <h2 class="section-title">Dampaknya</h2>
+            <p class="section-desc">
+              Pelemahan kurs bekerja pelan-pelan lewat harga, cicilan, dan
+              rencana keuangan. Empat jalur berikut paling mungkin kamu rasakan.
+            </p>
+          </div>
+
+          <div class="cards-2">
+            <article class="impact-card">
+              <div class="impact-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0"
+                  />
+                </svg>
+              </div>
+              <h4>Harga barang impor naik</h4>
+              <p>
+                Elektronik, pakaian bermerek, dan bahan baku industri ikut
+                menyesuaikan harga karena biaya impornya dibayar dalam dolar.
+              </p>
+            </article>
+            <article class="impact-card">
+              <div class="impact-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M3 3v18h18M7 14l4-4 4 4 5-5" />
+                </svg>
+              </div>
+              <h4>Cicilan dan biaya kuliah luar negeri</h4>
+              <p>
+                Tagihan dalam dolar—termasuk uang sekolah, langganan layanan
+                global, dan utang valas—setara lebih mahal dalam rupiah.
+              </p>
+            </article>
+            <article class="impact-card">
+              <div class="impact-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+                  />
+                </svg>
+              </div>
+              <h4>Daya beli menurun perlahan</h4>
+              <p>
+                Bersama inflasi, kurs yang melemah membuat anggaran bulanan
+                terasa lebih cepat habis untuk kebutuhan yang sama.
+              </p>
+            </article>
+            <article class="impact-card">
+              <div class="impact-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+              </div>
+              <h4>Nilai tabungan rupiah tergerus</h4>
+              <p>
+                Uang yang menganggur di rekening kehilangan daya beli terhadap
+                aset dolar bila bunganya lebih rendah dari laju inflasi.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+         SECTION 6: SOLUSI + GLOSARIUM
+         ═══════════════════════════════════════════ -->
+      <section class="section" id="glosarium">
+        <div class="container">
+          <div class="section-header">
+            <p class="eyebrow">03 · Solusi</p>
+            <h2 class="section-title">Apa yang bisa kamu lakukan</h2>
+            <p class="section-desc">
+              Tidak perlu bereaksi panik pada kurs harian. Yang membantu adalah
+              langkah kecil, konsisten, dan sesuai profil risiko kamu.
+            </p>
+          </div>
+
+          <div class="cards-3">
+            <article class="card">
+              <h3>Menghindari Pemborosan</h3>
+              <p>
+                Menghemat pengeluaran dengan membeli barang sesuai kebutuhan dan menghindari pemborosan.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Mengutamakan Produk Lokal</h3>
+              <p>
+                Mengutamakan produk lokal yang berkualitas agar ketergantungan terhadap barang impor berkurang.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Ikuti data resmi</h3>
+              <p>
+                Pantau kurs acuan harian dari Bank Indonesia dan inflasi bulanan
+                dari BPS, bukan angka yang beredar di obrolan grup.
+              </p>
+            </article>
+          </div>
+
+          <!-- Glosarium: grid 2 kolom -->
+          <div class="glossary">
+            <div>
+              <p class="eyebrow">Istilah</p>
+              <h2 class="section-title">Glosarium singkat</h2>
+            </div>
+            <div class="glossary-grid">
+              <div class="glossary-item">
+                <h5>Kurs tengah</h5>
+                <p>
+                  Nilai tukar acuan harian dari Bank Indonesia, titik tengah
+                  antara kurs beli dan kurs jual.
+                </p>
+              </div>
+              <div class="glossary-item">
+                <h5>Depresiasi</h5>
+                <p>
+                  Pelemahan nilai mata uang terhadap mata uang lain karena
+                  mekanisme pasar, bukan keputusan resmi.
+                </p>
+              </div>
+              <div class="glossary-item">
+                <h5>Cadangan devisa</h5>
+                <p>
+                  Simpanan valuta asing bank sentral yang dipakai menjaga
+                  stabilitas kurs dan membayar kewajiban luar negeri.
+                </p>
+              </div>
+              <div class="glossary-item">
+                <h5>Lindung nilai (hedging)</h5>
+                <p>
+                  Kesepakatan untuk mengunci nilai tukar di muka agar biaya
+                  valas tidak berubah karena pergerakan kurs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <p class="logo">RUPIAH<span class="logo-dot">.</span></p>
+          <p class="footer-desc">
+            Halaman edukasi satu halaman tentang pergerakan nilai tukar rupiah,
+            dibuat untuk pelajar dan profesional muda Indonesia.
+          </p>
+        </div>
+        <div>
+          <p class="footer-heading">Bagian</p>
+          <ul class="footer-links">
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#penyebab">Penyebab</a></li>
+            <li><a href="#dampak">Dampak</a></li>
+            <li><a href="#solusi">Solusi</a></li>
+            <li><a href="#glosarium">Glosarium</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-heading">Rujukan</p>
+          <ul class="footer-links">
+            <li><a href="#">Bank Indonesia — JISDOR</a></li>
+            <li><a href="#">BPS — Inflasi & ekspor</a></li>
+            <li><a href="#">IMF — Data makro</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>
+          Sumber data: Bank Indonesia, Badan Pusat Statistik. Angka dalam
+          halaman ini adalah data contoh untuk keperluan pembelajaran.
+        </p>
+        <p>© 2024 RUPIAH. — Materi edukasi, bukan saran keuangan.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
